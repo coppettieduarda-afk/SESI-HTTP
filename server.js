@@ -28,7 +28,7 @@ app.get("/alunos", (req, res) => {
 });
 
 // GET - Consultar aluno pelo id
-app.get("/aluno/:id", (req, res) => {
+app.get("/alunos/:id", (req, res) => {
     const id = Number(req.params.id);
 
     const aluno = alunos.find(a => a.id === id);
@@ -39,6 +39,7 @@ app.get("/aluno/:id", (req, res) => {
         });
 
        } 
+       res.status(200).json(aluno);
     })
 
     //POST - Cadastrar aluno
@@ -72,9 +73,11 @@ app.get("/aluno/:id", (req, res) => {
             return res.status(404).json({
                 mensagem: "aluno não encontrado"
             });
+        }
+           
 
             
-        }
+        
         const { nome, email, turma} = req.body;
 
           if(!nome || !email || !turma) {
@@ -109,6 +112,15 @@ app.get("/aluno/:id", (req, res) => {
         res.status(204).send();
 
     });
+
+    //iniciar servidor
+    app.listen(PORT, () => {
+        console.log(`API executando em http://localhost: ${PORT}`)
+
+    }
+
+
+)
 
 
 
